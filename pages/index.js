@@ -9,7 +9,7 @@ export async function getStaticProps(){
   const AllMaterialTwo = newStuff();
       return{
     props:{AllMaterial,AllMaterialTwo}
-  };
+  }
 }
 
 
