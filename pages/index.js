@@ -2,18 +2,21 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Conception from '../components/layout';
 import { getSortedList } from '../lib/data';
+import { getSortedthirdcustomList } from '../lib/data-thirdcustom';
 import { newStuff } from '../libdeux/dataTwo';
 
 export async function getStaticProps() {
   const AllMaterial = await getSortedList();
+  const AllthirdCustom = await getSortedthirdcustomList();
   const AllMaterialTwo = newStuff();
   return {
-    props: { AllMaterial, AllMaterialTwo }
+    props: { AllMaterial, AllMaterialTwo,AllthirdCustom },
+    revalidate: 60
   }
 }
 
 
-export default function House({ AllMaterialTwo, AllMaterial }) {
+export default function House({ AllMaterialTwo, AllMaterial, AllthirdCustom }) {
   return (
     <Conception house>
       <strong> <p>salut mon amie, cest next.js ici. </p></strong>
@@ -35,6 +38,17 @@ export default function House({ AllMaterialTwo, AllMaterial }) {
         {AllMaterial.map(
           ({ id, name }) => (
             <Link key={id} href={`/${id}`} className="list-group-item list-group-item-action list-group-item-dark">
+              {name}
+            </Link>
+          )
+        )
+        }
+      </div>
+      <h1> Third custom field & post type</h1>
+      <div className="navbar navbar-light bg-light">
+        {AllthirdCustom.map(
+          ({ id, name }) => (
+            <Link key={id} href={`/${id}`} className="navbar-brand">
               {name}
             </Link>
           )
